@@ -14,12 +14,15 @@ mongoose.connect(
   }
 );
 
+server.use("/admin", require("./routes/admin.js"));
+
 server.use(cors());
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 // server.use(express.static(path.join(__dirname, "build")));
 
 //Routes
+server.use("/api/v1/users", require("./routes/users.js"));
 server.use("/api/v1/posts", require("./routes/posts.js"));
 // server.get("/*", (req, res) => {
 //   res.sendFile(path.join(__dirname, "build", "index.html"));

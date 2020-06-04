@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { checkAuth } from "./functionAuth";
+import moment from 'moment';
+
 import {
   Col,
   Table,
@@ -36,6 +39,7 @@ export default class Comments extends Component {
       .catch((e) => console.log(e));
   };
   render() {
+    checkAuth();
     return (
       <div>
         <Container style={{ border: "1px solid black",marginTop:"100px" }}>

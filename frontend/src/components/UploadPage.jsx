@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import M from "materialize-css";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { checkAuth } from "./functionAuth";
+import swal from "sweetalert";
 
-const UploadPage = () => {
+
+const UploadPage = (props) => {
   const history = useHistory();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -36,6 +39,8 @@ const UploadPage = () => {
   }, [url]);
 
   const postDetails = () => {
+    if(title&&desc&&image)
+    {
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "whichbg");
@@ -47,9 +52,20 @@ const UploadPage = () => {
       .catch((err) => {
         console.log(err);
       });
+    }
+    else {
+      swal({
+        title: "No!",
+        text: "All Fields Must Be Filled",
+        icon: "error",
+        button: "ok"
+      })
+    }
   };
-
+  checkAuth()
   return (
+    
+
     <div
       className="card input-filed"
       style={{

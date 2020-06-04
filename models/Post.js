@@ -1,4 +1,3 @@
-
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -6,27 +5,25 @@ const postSchema = new Schema(
   {
     post_title: {
       required: true,
-      type: String
+      type: String,
     },
     post_image: {
       required: true,
-      type: String
+      type: String,
     },
     post_desc: {
       required: true,
-      type: String
+      type: String,
     },
     post_comments: {
-      required: true,
       type: [String],
-      default:[]
+      default: [],
     },
     post_likes: {
-        required: true,
-        type: Number,
-        default: 0
-      }
-    
+      required: true,
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

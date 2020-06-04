@@ -30,16 +30,17 @@ export default class Post extends Component {
           <Card.Img variant="top" src={this.state.img} />
           <Card.Body style={{ margin: "auto" ,alignContent:"center",textAlign:"center"}}>
             <Card.Title>{this.state.title}</Card.Title>
-            <Card.Text>{this.state.desc}</Card.Text>
+            <p>{this.state.desc}</p>
             <Container>
             <Button
-              className="mr-2"
+              className="align-self-end"
               variant="primary"
               href={`/comments/${this.state.id}`}
             >
               {this.state.comments} 💭
             </Button>
             <Button
+            className="align-self-end"
               onClick={(e) => {
                 e.target.setAttribute("disabled", true);
                 this.handleLikeButton();
