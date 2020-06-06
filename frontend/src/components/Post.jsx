@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Col, Row, Container, Card, Button } from "react-bootstrap";
 import axios from "axios";
+import { checkAuth } from "./functionAuth";
 
 export default class Post extends Component {
   state = {
@@ -13,6 +14,7 @@ export default class Post extends Component {
   };
 
   handleLikeButton = () => {
+    checkAuth();
     axios
       .post(`/posts/like/${this.state.id}`, this.state.likes)
       .then((result) => {
@@ -23,27 +25,33 @@ export default class Post extends Component {
       .catch((e) => console.log(e));
   };
 
+  
   render() {
     return (
       <div>
-        <Card style={{ width: "22rem" }} border="primary">
-          <Card.Img variant="top" src={this.state.img} />
+        <Card className="card-home-body" style={{ width: "22rem" }} border="primary" id={`card_${this.state.id}`}>
+          <a href={`/comments/${this.state.id}`}><Card.Img className="card-home-img" variant="top" src={this.state.img} id={`img_${this.state.id}`}/></a>
           <Card.Body style={{ margin: "auto" ,alignContent:"center",textAlign:"center"}}>
-            <Card.Title>{this.state.title}</Card.Title>
-            <p>{this.state.desc}</p>
+            <Card.Title id={`title_${this.state.id}`}>{this.state.title}</Card.Title>
+            <p id={`desc_${this.state.id}`}>{this.state.desc}</p>
             <Container>
             <Button
               className="align-self-end"
               variant="primary"
               href={`/comments/${this.state.id}`}
+              id={`comment_btn_${this.state.id}`}
             >
               {this.state.comments} 💭
             </Button>
             <Button
             className="align-self-end"
+            id={`like_btn_${this.state.id}`}
               onClick={(e) => {
+                if(localStorage.getItem("user_id"))
+                {
                 e.target.setAttribute("disabled", true);
                 this.handleLikeButton();
+                }
               }}
               variant="primary"
             >

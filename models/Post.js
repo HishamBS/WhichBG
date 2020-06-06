@@ -15,15 +15,23 @@ const postSchema = new Schema(
       required: true,
       type: String,
     },
-    post_comments: {
-      type: [String],
-      default: [],
-    },
+    post_comments: [
+      {
+        comment: {
+          type: String,
+          default: "",
+        },
+        sender: {
+          type: String,
+          default: "",
+        },
+      },
+    ],
     post_likes: {
       required: true,
       type: Number,
       default: 0,
-    },
+    }
   },
   { timestamps: true }
 );

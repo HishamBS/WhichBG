@@ -51,7 +51,7 @@ router.post("/like/:id", async (req, res) => {
 router.post("/newcomment/:id", async (req, res) => {
   try {
     let post = await Post.findById(req.params.id); 
-    post.post_comments.push(req.body.msg)
+    post.post_comments.push(req.body)
       let cmt = await post.save();
       res.json({ msg: "added comment", post: cmt });
   } catch (error) {

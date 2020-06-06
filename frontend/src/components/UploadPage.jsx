@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { checkAuth } from "./functionAuth";
 import swal from "sweetalert";
-
+import { Helmet } from "react-helmet";
 
 const UploadPage = (props) => {
   const history = useHistory();
@@ -14,13 +14,13 @@ const UploadPage = (props) => {
   const [url, setUrl] = useState("");
   useEffect(() => {
     if (url) {
-        axios.post('/posts/newpost',
-        {
-            post_title:title,
-            post_desc:desc,
-            post_image:url
+      axios
+        .post("/posts/newpost", {
+          post_title: title,
+          post_desc: desc,
+          post_image: url,
         })
-        .then((data) => {            
+        .then((data) => {
           if (data.error) {
             M.toast({ html: data.error, classes: "#c62828 red darken-3" });
           } else {
@@ -39,33 +39,30 @@ const UploadPage = (props) => {
   }, [url]);
 
   const postDetails = () => {
-    if(title&&desc&&image)
-    {
-    const data = new FormData();
-    data.append("file", image);
-    data.append("upload_preset", "whichbg");
-    data.append("cloud_name", "dfrj1nea2");
-    axios.post("https://api.cloudinary.com/v1_1/dfrj1nea2/image/upload",data)
-      .then((data) => {          
-        setUrl(data.data.url);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    }
-    else {
+    if (title && desc && image) {
+      const data = new FormData();
+      data.append("file", image);
+      data.append("upload_preset", "whichbg");
+      data.append("cloud_name", "dfrj1nea2");
+      axios
+        .post("https://api.cloudinary.com/v1_1/dfrj1nea2/image/upload", data)
+        .then((data) => {
+          setUrl(data.data.url);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
       swal({
         title: "No!",
         text: "All Fields Must Be Filled",
         icon: "error",
-        button: "ok"
-      })
+        button: "ok",
+      });
     }
   };
-  checkAuth()
+  checkAuth();
   return (
-    
-
     <div
       className="card input-filed"
       style={{
@@ -74,30 +71,43 @@ const UploadPage = (props) => {
         padding: "20px",
         textAlign: "center",
       }}
+      id="upload_card"
     >
+      <Helmet>
+        <title>{"WhichBG? - Upload"}</title>
+      </Helmet>
       <input
         type="text"
         placeholder="title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        id="upload_title"
       />
       <input
         type="text"
         placeholder="description"
         value={desc}
         onChange={(e) => setDesc(e.target.value)}
+        id="upload_desc"
       />
       <div className="file-field input-field">
         <div className="btn #64b5f6 blue darken-1">
-          <span style={{color:"white"}}>Uplaod Image</span>
-          <input type="file" accept=".gif,.jpg,.jpeg,.png" onChange={(e) => setImage(e.target.files[0])} maxSize={2097152}/>
+          <span style={{ color: "white" }}>Uplaod Image</span>
+          <input
+            id="upload_selectimage"
+            type="file"
+            accept=".gif,.jpg,.jpeg,.png"
+            onChange={(e) => setImage(e.target.files[0])}
+            maxSize={2097152}
+          />
         </div>
         <div className="file-path-wrapper">
           <input className="file-path validate" type="text" />
         </div>
       </div>
       <button
-      style={{color:"white"}}
+        id="upload_submit"
+        style={{ color: "white" }}
         className="btn waves-effect waves-light #64b5f6 blue darken-1"
         onClick={() => postDetails()}
       >

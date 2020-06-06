@@ -19,7 +19,13 @@ const userSchema = new Schema(
     isAdmin: {
       type: Boolean,
       default: false
-    }
+    },
+    liked_posts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post"
+      }
+    ]
   },
   { timestamps: true }
 );

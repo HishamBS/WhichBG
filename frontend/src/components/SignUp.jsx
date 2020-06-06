@@ -7,6 +7,7 @@ import swal from "sweetalert";
 import { register } from "./functionAuth";
 import { Card, Row } from "react-bootstrap";
 import { Avatar } from "antd";
+import { Helmet } from 'react-helmet'
 
 export default class SignUp extends Component {
   state = {
@@ -23,6 +24,9 @@ export default class SignUp extends Component {
     }
     return (
       <div>
+        <Helmet>
+          <title>{ "WhichBG? - SignUp" }</title>
+        </Helmet>
         <br />
         <br />
         <Formik
@@ -77,19 +81,9 @@ export default class SignUp extends Component {
           }}
           render={({ errors, status, touched }) => (
             <Row className="justify-content-md-center">
-              <Card style={{ width: "70%" }}>
+              <Card style={{ width: "70%",height: "30vw" }} id="signup_card">
                 <Card.Body>
-                  <Card.Title>Registeration Form </Card.Title>
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-
+                  <Card.Title id="signup_title">Registeration Form </Card.Title>
                   <Form>
                     <div className="form-group">
                       <label htmlFor="nickname">Nickname</label>
@@ -102,11 +96,13 @@ export default class SignUp extends Component {
                             ? " is-invalid"
                             : "")
                         }
+                        id="signup_nickname"
                       />
                       <ErrorMessage
                         name="nickname"
                         component="div"
                         className="invalid-feedback"
+                        id="signup_nickname_err"
                       />
                     </div>
                     <div className="form-group">
@@ -118,11 +114,13 @@ export default class SignUp extends Component {
                           "form-control" +
                           (errors.email && touched.email ? " is-invalid" : "")
                         }
+                        id="signup_email"
                       />
                       <ErrorMessage
                         name="email"
                         component="div"
                         className="invalid-feedback"
+                        id="signup_email_err"
                       />
                     </div>
                     <div className="form-group">
@@ -136,11 +134,13 @@ export default class SignUp extends Component {
                             ? " is-invalid"
                             : "")
                         }
+                        id="signup_password"
                       />
                       <ErrorMessage
                         name="password"
                         component="div"
                         className="invalid-feedback"
+                        id="signup_password_err"
                       />
                     </div>
                     <div className="form-group">
@@ -154,18 +154,20 @@ export default class SignUp extends Component {
                             ? " is-invalid"
                             : "")
                         }
+                        id="signup_confirm_password"
                       />
                       <ErrorMessage
                         name="confirmPassword"
                         component="div"
                         className="invalid-feedback"
+                        id="signup_confirm_password_err"
                       />
                     </div>
                     <div className="form-group">
-                      <button type="submit" className="btn btn-primary mr-2">
+                      <button id="signup_submit"type="submit" className="btn btn-primary mr-2">
                         Register
                       </button>
-                      <button type="reset" className="btn btn-secondary">
+                      <button id="signup_reset" type="reset" className="btn btn-secondary">
                         Reset
                       </button>
                     </div>

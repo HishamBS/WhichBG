@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import Post from "./Post";
 const Gallery = (props) => {
   let allGallery = props.allPosts.map((post) => (
-    <Col sm={4} className='mb-3'>
+    <Col id={`post_${props.allPosts.indexOf(post)}`} sm={4} className='mb-3'>
       <Post post={post} />
     </Col>
   ));

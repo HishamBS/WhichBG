@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { checkAuth } from "./functionAuth";
-import moment from 'moment';
+import moment from "moment";
+import { Helmet } from 'react-helmet'
 
 import {
   Col,
@@ -22,17 +23,20 @@ export default class Comments extends Component {
     likes: this.props.post.post_likes,
     desc: this.props.post.post_desc,
     comments: this.props.post.post_comments,
-    msg: "",
+    comment: "",
+    sender: localStorage.getItem("user_nickname"),
   };
 
   handleChange = (e) => {
-    this.setState({ msg: e.target.value });
+    this.setState({ comment: e.target.value });
   };
   handleSendButton = () => {
     axios
-      .post(`/posts/newcomment/${this.state.id}`, { msg: this.state.msg })
+      .post(`/posts/newcomment/${this.state.id}`, {
+        comment: this.state.comment,
+        sender: this.state.sender,
+      })
       .then((result) => {
-        console.log(result);
         this.refs.inputField.value = "";
         this.setState({ comments: result.data.post.post_comments });
       })
@@ -42,37 +46,50 @@ export default class Comments extends Component {
     checkAuth();
     return (
       <div>
-        <Container style={{ border: "1px solid black",marginTop:"100px" }}>
-          <Row style={{ alignContent:"center",textAlign:"center" ,justifyContent:"center"}}>
+        <Helmet>
+          <title>{ `WhichBG? - ${this.state.title} Comments` }</title>
+        </Helmet>
+        <Container id="post_box" style={{ border: "1px solid black", marginTop: "100px" }}>
+          <Row
+            style={{
+              alignContent: "center",
+              textAlign: "center",
+              justifyContent: "center",
+            }}
+          >
             <h2>Write Something About The Picture</h2>
           </Row>
           <Row>
-            <Col style={{float:"left",marginRight:"50px"}}>
-              <img style={{width:"100%",height: "20vw"}}src={this.props.post.post_image} />
+            <Col style={{ float: "left", marginRight: "50px" }}>
+              <a href={this.state.img} target="_blank"><img id="img"
+                style={{ width: "100%", height: "20vw" }}
+                src={this.props.post.post_image}
+              /></a>
             </Col>
-            <Col style={{float:"right"}}>
-            <FormControl
-              placeholder="Write here , click enter to send..."
-              aria-describedby="basic-addon2"
-              onChange={this.handleChange}
-              ref="inputField"
-              onKeyDown={e=>{
-                if(e.keyCode==13)
-                this.handleSendButton()
-              }}
-            />
-            {this.state.comments.map((comment) => (
-                <Table bordered>
+            <Col style={{ float: "right" }}>
+              <FormControl
+              id="typing_area"
+                placeholder="Write here , click enter to send..."
+                aria-describedby="basic-addon2"
+                onChange={this.handleChange}
+                ref="inputField"
+                onKeyDown={(e) => {
+                  if (e.keyCode == 13) this.handleSendButton();
+                }}
+              />
+              <Table bordered id="comments_table">
+              {this.state.comments.map((comment) => (
+                
                   <tr style={{ textAlign: "left" }}>
-                    <td style={{ width: "10px" }}>Anon:</td>
-                    <td>{comment}</td>
+                    <td id={`sender_name_${this.state.comments.indexOf(comment)}`} style={{ width: "10px" }}>{comment.sender}</td>
+                    <td id={`comment_${this.state.comments.indexOf(comment)}`}>{comment.comment}</td>
                   </tr>
-                </Table>
+                
               ))}
-          </Col>
+              </Table>
+            </Col>
           </Row>
         </Container>
-       
       </div>
     );
   }

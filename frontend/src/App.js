@@ -10,7 +10,8 @@ import UploadPage from "./components/UploadPage";
 import Comments from "./components/Comments";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
-
+import FooterPage from "./components/FooterPage";
+import Profile from "./components/Profile";
 class App extends React.Component {
   state = {
     allPosts: [],
@@ -23,7 +24,7 @@ class App extends React.Component {
       .catch((e) => console.log(e));
   };
 
-  handleClick = e => {
+  handleClick = (e) => {
     localStorage.removeItem("usertoken");
     localStorage.removeItem("user_id");
     localStorage.removeItem("user_nickname");
@@ -31,9 +32,8 @@ class App extends React.Component {
       title: "Logout successfully",
       icon: "success",
       showConfirmButton: false,
-      timer: 2500
-    }).then(window.location.href = "/")
-
+      timer: 2500,
+    }).then((window.location.href = "/"));
   };
 
   componentDidMount() {
@@ -49,38 +49,57 @@ class App extends React.Component {
     return (
       <div className="App">
         <BrowserRouter>
-        {!localStorage.usertoken ? (
-          <Navbar bg="primary" variant="dark" expand="lg">
-            <Navbar.Brand href="/">WhichBG?</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="ml-auto">
-                <NavLink className="nav-link" to="/">
-                  Home
-                </NavLink>
-                <NavLink className="nav-link" to="/login">Login</NavLink>
-                <NavLink className="nav-link" to="/signup">SignUp</NavLink>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>):(
+          {!localStorage.usertoken ? (
+            <Navbar
+              bg="primary"
+              variant="dark"
+              expand="lg"
+              
+            >
+              <Navbar.Brand href="/">WhichBG?</Navbar.Brand>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="ml-auto">
+                  <NavLink className="nav-link" to="/" id="navbar_home">
+                    Home
+                  </NavLink>
+                  <NavLink className="nav-link" to="/login" id="navbar_login">
+                    Login
+                  </NavLink>
+                  <NavLink className="nav-link" to="/signup" id="navbar_signup">
+                    SignUp
+                  </NavLink>
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
+          ) : (
             <Navbar bg="primary" variant="dark" expand="lg">
-            <Navbar.Brand href="/">WhichBG?</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="ml-auto">
-                <NavLink className="nav-link" to="/">
-                  Home
-                </NavLink>
-                <NavLink className="nav-link" to="/upload">
-                  Upload
-                </NavLink>
-                <NavLink as={Button} onClick={this.handleClick}className="nav-link" to="/">
-                  Logout
-                </NavLink> 
-
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>)}
+              <Navbar.Brand href="/">WhichBG?</Navbar.Brand>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="ml-auto">
+                  <NavLink className="nav-link" to="/" id="navbar_home">
+                    Home
+                  </NavLink>
+                  <NavLink className="nav-link" to="/profile" id="navbar_profile">
+                    My Profile
+                  </NavLink>
+                  <NavLink className="nav-link" to="/upload" id="navbar_upload">
+                    Upload
+                  </NavLink>
+                  <NavLink
+                    as={Button}
+                    onClick={this.handleClick}
+                    className="nav-link"
+                    to="/"
+                    id="navbar_logout"
+                  >
+                    Logout
+                  </NavLink>
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
+          )}
           <Switch>
             <Route
               exact
@@ -92,6 +111,7 @@ class App extends React.Component {
             <Route exact path="/upload" component={UploadPage} />
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={Login} />
+            <Route path="/profile" component={Profile} />
             <Route
               path="/comments/:id"
               render={({ match }) => {
@@ -109,6 +129,7 @@ class App extends React.Component {
             <Route path="*" component={NotFound} />
           </Switch>
         </BrowserRouter>
+        {/* <FooterPage/> */}
       </div>
     );
   }
