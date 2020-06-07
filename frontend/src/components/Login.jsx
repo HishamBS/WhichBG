@@ -51,7 +51,7 @@ export default class Login extends Component {
         <br />
         <br />
         <Row className="justify-content-md-center">
-          <Card style={{ width: "30%", height: "22vw" }} id="login_card">
+          <Card style={{ width: '27rem',height: '30rem' }} id="login_card">
             <Card.Body>
               <Card.Title id="login_title">Login Form</Card.Title>
               <Formik

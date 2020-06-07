@@ -19,6 +19,7 @@ const UploadPage = (props) => {
           post_title: title,
           post_desc: desc,
           post_image: url,
+          post_owner:localStorage.getItem("user_id")
         })
         .then((data) => {
           if (data.error) {

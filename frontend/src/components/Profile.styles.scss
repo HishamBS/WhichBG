@@ -1,0 +1,25 @@
+.profile {
+    display: grid;
+    width: 40pc;
+    height: 40pc;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    margin: 20px auto;
+    grid-auto-rows: 1fr;
+    align-items: center;
+    .profile-button {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+    .profile-name {
+      font-size: 25px;
+      width: 66%;
+      margin-inline-start: 105px;
+  
+      border-bottom: 1px solid black;
+    }
+    .myProfile {
+      text-align: center;
+    }
+  }
+  

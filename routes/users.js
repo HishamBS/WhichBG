@@ -42,6 +42,18 @@ router.get("/:id/likedposts", (req, res) => {
     .catch((err) => res.status(400).send(err));
 });
 
+//get specific user uploaded posts
+router.get("/:id/uploadedposts", (req, res) => {
+  User.findById(req.params.id).populate("uploaded_posts")
+    .then((user) => {
+      user
+        ? res.status(200).json(user.uploaded_posts)
+        : res.status(404).json("user not found");
+    })
+    .catch((err) => res.status(400).send(err));
+});
+
+
 //edit user info without password
 router.put("/edituser/:id", (req, res) => {
   let edited = req.body;

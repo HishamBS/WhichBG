@@ -26,6 +26,12 @@ const userSchema = new Schema(
         ref: "Post"
       }
     ],
+    uploaded_posts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post"
+      }
+    ],
     total_likes:{
       type:Number,
       default:0

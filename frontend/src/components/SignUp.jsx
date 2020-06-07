@@ -7,7 +7,7 @@ import swal from "sweetalert";
 import { register } from "./functionAuth";
 import { Card, Row } from "react-bootstrap";
 import { Avatar } from "antd";
-import { Helmet } from 'react-helmet'
+import { Helmet } from "react-helmet";
 
 export default class SignUp extends Component {
   state = {
@@ -25,7 +25,7 @@ export default class SignUp extends Component {
     return (
       <div>
         <Helmet>
-          <title>{ "WhichBG? - SignUp" }</title>
+          <title>{"WhichBG? - SignUp"}</title>
         </Helmet>
         <br />
         <br />
@@ -81,7 +81,10 @@ export default class SignUp extends Component {
           }}
           render={({ errors, status, touched }) => (
             <Row className="justify-content-md-center">
-              <Card style={{ width: "70%",height: "30vw" }} id="signup_card">
+              <Card
+                style={{ width: "27rem", height: "33rem" }}
+                id="signup_card"
+              >
                 <Card.Body>
                   <Card.Title id="signup_title">Registeration Form </Card.Title>
                   <Form>
@@ -164,10 +167,18 @@ export default class SignUp extends Component {
                       />
                     </div>
                     <div className="form-group">
-                      <button id="signup_submit"type="submit" className="btn btn-primary mr-2">
+                      <button
+                        id="signup_submit"
+                        type="submit"
+                        className="btn btn-primary mr-2"
+                      >
                         Register
                       </button>
-                      <button id="signup_reset" type="reset" className="btn btn-secondary">
+                      <button
+                        id="signup_reset"
+                        type="reset"
+                        className="btn btn-secondary"
+                      >
                         Reset
                       </button>
                     </div>

@@ -1,19 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap");
 
-
-.collection-item{
+.navbar {
+  background-color: transparent !important;
+  color: black;
+}
+.collection-item {
   width: 100%;
 }
+.navbar-light .navbar-nav .nav-link {
+  color: black;
+}
 
-
-#toast-container{
-  top:30px !important;
+#toast-container {
+  top: 30px !important;
   right: 20px !important;
   left: auto !important;
 }
 
-
-.material-icons:hover{
+.material-icons:hover {
   cursor: pointer;
 }
 .card-img-top {
@@ -21,10 +25,15 @@
   height: 18vw;
   object-fit: cover;
 }
-.card-body{
+.card-body {
   width: 100%;
   height: 13vw;
-  flex-grow:0;
+  flex-grow: 0;
 }
 
-
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+  margin-left: 0;
+  /* padding: 10px; */
+  padding-bottom: 28px;
+}

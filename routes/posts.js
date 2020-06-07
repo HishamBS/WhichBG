@@ -29,7 +29,10 @@ router.post("/newpost", async (req, res) => {
   try {
     let post = new Post(req.body);
     let savedPost = await post.save();
-    res.json({ msg: "added", post: savedPost });
+    let user = await User.findById(req.body.post_owner);
+    user.uploaded_posts.push(savedPost._id);
+    let updatedUser = await user.save();
+    res.json({ msg: "added", post: savedPost , owner:updatedUser.nickname });
   } catch (error) {
     res.json({ msg: error });
   }

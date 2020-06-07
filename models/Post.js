@@ -31,6 +31,10 @@ const postSchema = new Schema(
       required: true,
       type: Number,
       default: 0,
+    },
+    post_owner:{
+      type: Schema.Types.ObjectId,
+      ref: "User"
     }
   },
   { timestamps: true }
