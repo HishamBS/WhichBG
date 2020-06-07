@@ -14,6 +14,7 @@ export default class Post extends Component {
     user_id: localStorage.getItem("user_id"),
     userLiked: [],
   };
+
   getUserLiked = () => {
     axios
       .get(`/users/${localStorage.getItem("user_id")}/likedposts`)
@@ -31,13 +32,24 @@ export default class Post extends Component {
         })
         .catch((e) => console.log(e));
     }
-  };
+    // //remove like{
+    // // if (this.state.userLiked.find((post) => post._id == this.state.id)) {
+    // let liked = false;
+    // this.state.userLiked.forEach((element) => {
+    //   if (this.state.id == element) {
+    //     liked = true;
+    //   }
+    // });
+    // if (liked) {
+    //   this.setState({ userLiked: this.state.userLiked.push(this.state.id) });
+    // } else {
+    //  let likes = this.state.userLiked.filter((elem) => {
+    //     return this.state.id != elem;
+    //   });
+    //   this.setState({userLiked: likes})
+    // }
 
-  isPostLiked = () => {
-
-    if(this.state.userLiked.find((post) => post._id == this.state.id))
-      return true
-      
+    //add like
   };
 
   componentDidMount() {
@@ -84,17 +96,19 @@ export default class Post extends Component {
                 {this.state.comments} 💭
               </Button>
               <Button
-                disabled={this.isPostLiked()}
                 className="align-self-end"
                 id={`like_btn_${this.state.id}`}
                 onClick={(e) => {
                   checkAuth();
                   this.handleLikeButton();
-                  e.target.setAttribute("disabled", true);
+                  window.location.reload(true);
                 }}
                 variant="primary"
               >
-                {this.state.likes} 👍
+                {this.state.likes}
+                {this.state.userLiked.find((post) => post._id == this.state.id)
+                  ? "❤️"
+                  : "🤍"}
               </Button>
             </Container>
           </Card.Body>

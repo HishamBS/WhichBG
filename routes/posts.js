@@ -48,7 +48,18 @@ router.post("/like/:id", async (req, res) => {
       let likedUser = await user.save();
       res.json({ msg: "liked", post: likedPost, user: likedUser.nickname });
     } else {
-      res.json({ msg: "Already liked" });
+      post.post_likes -= 1;
+      user.total_likes -= 1;
+      user.liked_posts = user.liked_posts.filter(
+        (liked) => liked != req.params.id
+      );
+      let unlikedPost = await post.save();
+      let unlikedUser = await user.save();
+      res.json({
+        msg: "unliked",
+        post: unlikedPost,
+        user: unlikedUser.nickname,
+      });
     }
   } catch (error) {
     res.json({ msg: error });
