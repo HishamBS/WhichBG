@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { checkAuth } from "./functionAuth";
 import moment from "moment";
-import { Helmet } from 'react-helmet'
+import { Helmet } from "react-helmet";
 
 import {
   Col,
@@ -25,6 +25,7 @@ export default class Comments extends Component {
     comments: this.props.post.post_comments,
     comment: "",
     sender: localStorage.getItem("user_nickname"),
+    user_id: localStorage.getItem("user_id"),
   };
 
   handleChange = (e) => {
@@ -33,6 +34,7 @@ export default class Comments extends Component {
   handleSendButton = () => {
     axios
       .post(`/posts/newcomment/${this.state.id}`, {
+        user_id: this.state.user_id,
         comment: this.state.comment,
         sender: this.state.sender,
       })
@@ -47,9 +49,12 @@ export default class Comments extends Component {
     return (
       <div>
         <Helmet>
-          <title>{ `WhichBG? - ${this.state.title} Comments` }</title>
+          <title>{`WhichBG? - ${this.state.title} Comments`}</title>
         </Helmet>
-        <Container id="post_box" style={{ border: "1px solid black", marginTop: "100px" }}>
+        <Container
+          id="post_box"
+          style={{ border: "1px solid black", marginTop: "100px" }}
+        >
           <Row
             style={{
               alignContent: "center",
@@ -61,14 +66,17 @@ export default class Comments extends Component {
           </Row>
           <Row>
             <Col style={{ float: "left", marginRight: "50px" }}>
-              <a href={this.state.img} target="_blank"><img id="img"
-                style={{ width: "100%", height: "20vw" }}
-                src={this.props.post.post_image}
-              /></a>
+              <a href={this.state.img} target="_blank">
+                <img
+                  id="img"
+                  style={{ width: "100%", height: "20vw" }}
+                  src={this.props.post.post_image}
+                />
+              </a>
             </Col>
             <Col style={{ float: "right" }}>
               <FormControl
-              id="typing_area"
+                id="typing_area"
                 placeholder="Write here , click enter to send..."
                 aria-describedby="basic-addon2"
                 onChange={this.handleChange}
@@ -78,14 +86,19 @@ export default class Comments extends Component {
                 }}
               />
               <Table bordered id="comments_table">
-              {this.state.comments.map((comment) => (
-                
+                {this.state.comments.reverse().map((comment) => (
                   <tr style={{ textAlign: "left" }}>
-                    <td id={`sender_name_${this.state.comments.indexOf(comment)}`} style={{ width: "10px" }}>{comment.sender}</td>
-                    <td id={`comment_${this.state.comments.indexOf(comment)}`}>{comment.comment}</td>
+                    <td
+                      id={`sender_name_${this.state.comments.indexOf(comment)}`}
+                      style={{ width: "10px" }}
+                    >
+                      {comment.sender}
+                    </td>
+                    <td id={`comment_${this.state.comments.indexOf(comment)}`}>
+                      {comment.comment}
+                    </td>
                   </tr>
-                
-              ))}
+                ))}
               </Table>
             </Col>
           </Row>

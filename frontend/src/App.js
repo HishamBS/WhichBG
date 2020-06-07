@@ -50,12 +50,7 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           {!localStorage.usertoken ? (
-            <Navbar
-              bg="primary"
-              variant="dark"
-              expand="lg"
-              
-            >
+            <Navbar bg="primary" variant="dark" expand="lg">
               <Navbar.Brand href="/">WhichBG?</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
@@ -81,7 +76,11 @@ class App extends React.Component {
                   <NavLink className="nav-link" to="/" id="navbar_home">
                     Home
                   </NavLink>
-                  <NavLink className="nav-link" to="/profile" id="navbar_profile">
+                  <NavLink
+                    className="nav-link"
+                    to="/profile"
+                    id="navbar_profile"
+                  >
                     My Profile
                   </NavLink>
                   <NavLink className="nav-link" to="/upload" id="navbar_upload">
@@ -105,7 +104,10 @@ class App extends React.Component {
               exact
               path="/"
               render={(props) => (
-                <Home {...props} allPosts={this.state.allPosts} />
+                <Home
+                  {...props}
+                  allPosts={this.state.allPosts}
+                />
               )}
             />
             <Route exact path="/upload" component={UploadPage} />

@@ -25,7 +25,15 @@ const userSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: "Post"
       }
-    ]
+    ],
+    total_likes:{
+      type:Number,
+      default:0
+    },
+    total_comments:{
+      type:Number,
+      default:0
+    }
   },
   { timestamps: true }
 );

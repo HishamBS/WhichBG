@@ -31,6 +31,17 @@ router.get("/:id", (req, res) => {
     .catch((err) => res.status(400).send(err));
 });
 
+//get specific user liked posts
+router.get("/:id/likedposts", (req, res) => {
+  User.findById(req.params.id).populate("liked_posts")
+    .then((user) => {
+      user
+        ? res.status(200).json(user.liked_posts)
+        : res.status(404).json("user not found");
+    })
+    .catch((err) => res.status(400).send(err));
+});
+
 //edit user info without password
 router.put("/edituser/:id", (req, res) => {
   let edited = req.body;

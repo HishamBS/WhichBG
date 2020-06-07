@@ -11,20 +11,40 @@ export default class Post extends Component {
     likes: this.props.post.post_likes,
     desc: this.props.post.post_desc,
     comments: this.props.post.post_comments.length,
+    user_id: localStorage.getItem("user_id"),
+    userLiked: [],
+  };
+  getUserLiked = () => {
+    axios
+      .get(`/users/${localStorage.getItem("user_id")}/likedposts`)
+      .then((likedPosts) => {
+        this.setState({ userLiked: likedPosts.data });
+      });
   };
 
   handleLikeButton = () => {
     if (localStorage.getItem("user_id")) {
       axios
-        .post(`/posts/like/${this.state.id}`, this.state.likes)
+        .post(`/posts/like/${this.state.id}`, { user_id: this.state.user_id })
         .then((result) => {
           this.setState({ likes: result.data.post.post_likes });
-
-          //
         })
         .catch((e) => console.log(e));
     }
   };
+
+  isPostLiked = () => {
+
+    if(this.state.userLiked.find((post) => post._id == this.state.id))
+      return true
+      
+  };
+
+  componentDidMount() {
+    if (localStorage.getItem("usertoken")) {
+      this.getUserLiked();
+    }
+  }
 
   render() {
     return (
@@ -64,13 +84,13 @@ export default class Post extends Component {
                 {this.state.comments} 💭
               </Button>
               <Button
+                disabled={this.isPostLiked()}
                 className="align-self-end"
                 id={`like_btn_${this.state.id}`}
                 onClick={(e) => {
                   checkAuth();
-                    this.handleLikeButton();
-                    e.target.setAttribute("disabled", true);
-                  
+                  this.handleLikeButton();
+                  e.target.setAttribute("disabled", true);
                 }}
                 variant="primary"
               >

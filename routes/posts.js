@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const Post = require("../models/Post");
-
+const User = require("../models/User");
 //get specific post page
 router.get("/:id", (req, res) => {
   Post.findById(req.params.id)
@@ -38,10 +38,18 @@ router.post("/newpost", async (req, res) => {
 //increase like
 router.post("/like/:id", async (req, res) => {
   try {
-    let post = await Post.findById(req.params.id); 
-    post.post_likes+=1;
+    let user = await User.findById(req.body.user_id);
+    let post = await Post.findById(req.params.id);
+    if (!user.liked_posts.find((post) => post._id == req.params.id)) {
+      post.post_likes += 1;
+      user.total_likes += 1;
+      user.liked_posts.push(post._id);
       let likedPost = await post.save();
-      res.json({ msg: "liked", post: likedPost });
+      let likedUser = await user.save();
+      res.json({ msg: "liked", post: likedPost, user: likedUser.nickname });
+    } else {
+      res.json({ msg: "Already liked" });
+    }
   } catch (error) {
     res.json({ msg: error });
   }
@@ -50,10 +58,13 @@ router.post("/like/:id", async (req, res) => {
 //add comment
 router.post("/newcomment/:id", async (req, res) => {
   try {
-    let post = await Post.findById(req.params.id); 
-    post.post_comments.push(req.body)
-      let cmt = await post.save();
-      res.json({ msg: "added comment", post: cmt });
+    let post = await Post.findById(req.params.id);
+    let user = await User.findById(req.body.user_id);
+    user.total_comments += 1;
+    post.post_comments.push(req.body);
+    let cmt = await post.save();
+    let cmtUsr = await user.save();
+    res.json({ msg: "added comment", post: cmt });
   } catch (error) {
     res.json({ msg: error });
   }
