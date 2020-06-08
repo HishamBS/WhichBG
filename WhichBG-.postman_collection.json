@@ -1,0 +1,390 @@
+{
+	"info": {
+		"_postman_id": "1e63afaa-794c-4027-a28b-c15b27d12e40",
+		"name": "WhichBG?",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "Get :  one user liked posts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/users/5ed8c6661ff44c6a394315b5/likedposts",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"users",
+										"5ed8c6661ff44c6a394315b5",
+										"likedposts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get :  One user by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/users/5ed8c6661ff44c6a394315b5",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"users",
+										"5ed8c6661ff44c6a394315b5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get: All Users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/users",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get : one user uploaded posts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/users/5ed8c6661ff44c6a394315b5/uploadedposts",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"users",
+										"5ed8c6661ff44c6a394315b5",
+										"uploadedposts"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "PUT",
+					"item": [
+						{
+							"name": "Put :  Update user info (No Password)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"nickname\":\"Edited hbs\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/users/edituser/5ed8c6661ff44c6a394315b5",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"users",
+										"edituser",
+										"5ed8c6661ff44c6a394315b5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Put :  Update user password only",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"password\":\"Hh?12345\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/users/editpassword/5ed8c6661ff44c6a394315b5",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"users",
+										"editpassword",
+										"5ed8c6661ff44c6a394315b5"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "Post : create new user(Unique Email Only)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"nickname\":\"test user\",\n\t\"email\":\"testing1@test.com\",\n\t\"password\":\"Test12345?\"\n\t\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/users/register",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Post : login with existing user",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\":\"testing1@test.com\",\n\t\"password\":\"Test12345?\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/users/login",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "Get : all posts in the website",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/posts",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get :  one post by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/posts/5edc8915780d6ed0bac1c652",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"posts",
+										"5edc8915780d6ed0bac1c652"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "Post : create new post ",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"post_title\":\"api post\",\n\t\"post_desc\":\"postman\",\n\t\"post_image\":\"https://images.sftcdn.net/images/t_app-cover-l,f_auto/p/befbcde0-9b36-11e6-95b9-00163ed833e7/260663710/the-test-fun-for-friends-screenshot.jpg\",\n\t\"post_owner\":\"5ed8c6661ff44c6a394315b5\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/posts/newpost",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"posts",
+										"newpost"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Post : like post (sned again for unlike)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"user_id\":\"5ed8c6661ff44c6a394315b5\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/posts/like/5eddc13ad26bdc4233949226",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"posts",
+										"like",
+										"5eddc13ad26bdc4233949226"
+									]
+								},
+								"description": "req.params : post_id\nreq.body : user_id"
+							},
+							"response": []
+						},
+						{
+							"name": "Post : comment on post (sned again for unlike)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"user_id\":\"5ed8c6661ff44c6a394315b5\",\n\t\"comment\":\"postman hi\",\n\t\"sender\":\"edited hbs\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/posts/newcomment/5eddc13ad26bdc4233949226",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"posts",
+										"newcomment",
+										"5eddc13ad26bdc4233949226"
+									]
+								},
+								"description": "req.params : post_id,\nreq.body : user_id , comment , sender:any nickname"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a92e7a43-4690-4048-8b14-a983e80f9c85",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "2840f4f7-748a-42f5-9566-7d5d603f62ab",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "13ba4cdd-245c-472e-bba3-def1e95286da",
+			"key": "localhost",
+			"value": "http://localhost:5000/api/v1",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

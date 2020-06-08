@@ -42,7 +42,10 @@ export default class SignUp extends Component {
               .email("Email is invalid")
               .required("Email is required"),
             password: Yup.string()
-              .min(6, "Password must be at least 6 numbers")
+              .min(8, "Password must be at least 8 numbers")
+              .matches(/[a-z]/, 'at least one lowercase char')
+              .matches(/[A-Z]/, 'at least one uppercase char')
+              .matches(/[a-zA-Z]+[^a-zA-Z\s]+/, 'at least 1 number or special char (@,!,#, etc).')
               .required("Password is required"),
             confirmPassword: Yup.string()
               .oneOf([Yup.ref("password"), null], "Passwords must match")

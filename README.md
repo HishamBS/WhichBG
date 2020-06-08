@@ -33,8 +33,8 @@ A very simple Full-Stack Web Application letting registered users to upload pict
 - The user can browse the homepage and see all available pictures.
 - The user must be rigestered to add comment or like.
 - The registered user can upload a new image from the upload page.
-- The user can navigate to his profile page to edit nickname or password.
-- Only admins can delete or edit website content through admin dashboard.
+- The user can navigate to his profile page to edit password.
+- The user can delete post from his feed page.
 
 ---
 
@@ -48,5 +48,5 @@ A very simple Full-Stack Web Application letting registered users to upload pict
 ## Acknowledgments
 
 - Saudi Information Technology Company (**SITE**)
-- Our Awsome Instructor : Neeraj
+- Our Awsome Instructor : Neeraj Singh
 - KnowledgeHut

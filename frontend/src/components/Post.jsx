@@ -14,9 +14,11 @@ class Post extends React.Component {
     likes: this.props.post.post_likes,
     desc: this.props.post.post_desc,
     comments: this.props.post.post_comments.length,
+    owner: this.props.post.post_owner.nickname,
     user_id: localStorage.getItem("user_id"),
     userLiked: [],
   };
+
 
   getUserLiked = () => {
     axios
@@ -25,17 +27,6 @@ class Post extends React.Component {
         this.setState({ userLiked: likedPosts.data });
       });
   };
-
-  // handleLikeButton = () => {
-  //   if (localStorage.getItem("user_id")) {
-  //     axios
-  //       .post(`/posts/like/${this.state.id}`, { user_id: this.state.user_id })
-  //       .then((result) => {
-  //         this.setState({ likes: result.data.post.post_likes });
-  //       })
-  //       .catch((e) => console.log(e));
-  //   }
-  // };
 
   handleLikeButton = () => {
     if (localStorage.getItem("user_id")) {
@@ -46,15 +37,13 @@ class Post extends React.Component {
         })
         .catch((e) => console.log(e));
     }
-    //remove like{
-    // if (this.state.userLiked.find((post) => post._id == this.state.id)) {
+    //remove
     let liked = false;
     this.state.userLiked.forEach((element) => {
       if (this.state.id == element._id) {
         liked = true;
       }
     });
-
     // if its not liked
     if (!liked) {
       // add like
@@ -66,7 +55,9 @@ class Post extends React.Component {
       );
     }
 
-    //add like
+    // if (this.props.history.location.pathname === "/myfeed") {
+    //   window.location.reload(true);
+    // }
   };
 
   componentDidMount() {
@@ -91,7 +82,6 @@ class Post extends React.Component {
             src={this.state.img}
           />
           <span id={`title_${this.state.id}`} className="item-title">
-            {" "}
             {this.state.title}
           </span>
 
@@ -107,12 +97,14 @@ class Post extends React.Component {
                 onClick={(e) => {
                   checkAuth();
                   this.handleLikeButton();
+                  window.location.reload(true);
+
                 }}
               >
-                {this.state.likes}
                 {this.state.userLiked.find((post) => post._id == this.state.id)
                   ? "❤️"
                   : "🤍"}
+                {this.state.likes}
               </button>
 
               <button
@@ -122,7 +114,10 @@ class Post extends React.Component {
                 }
                 id={`comment_btn_${this.state.id}`}
               >
-                {this.state.comments} 💭
+                💭{this.state.comments}
+              </button>
+              <button className="item-button" id={`owner_btn_${this.state.id}`}>
+                📷{this.state.owner}
               </button>
             </div>
           </div>

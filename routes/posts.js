@@ -17,7 +17,7 @@ router.get("/:id", (req, res) => {
 //get all posts page
 router.get("/", async (req, res) => {
   try {
-    let allPosts = await Post.find().sort({ post_likes: "desc" });
+    let allPosts = await Post.find().sort({ post_likes: "desc" }).populate("post_owner");
     res.json(allPosts);
   } catch (error) {
     res.json({ msg: error });

@@ -1,0 +1,57 @@
+.comment-title{
+    text-align: center;
+    margin:1%;
+}
+.comment-continer{
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .comment{
+        height: 400px;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        overflow: hidden;
+
+        width: 50%;
+        align-self: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+        grid-template-rows: 1fr ;
+        // background-color: aqua;
+    }
+    .comment-table{
+        grid-column: 1;
+        width: 100%
+        
+    }
+    .comment-pic{
+        grid-column: 2;
+    
+    }
+    .comment-form{
+        width: 100%;
+        padding: 0 0 0 5px;
+
+    }
+    .backgroundImage{
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        grid-column: 2;
+        grid-row: 1/3;
+      &:hover {
+        cursor: pointer;
+
+        transform: scale(1.1);
+        transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+      }
+
+      }
+      
+}
+.test{
+    overflow: scroll;
+}

@@ -16,6 +16,9 @@
   right: 20px !important;
   left: auto !important;
 }
+.navbar {
+  z-index: 9999;
+}
 
 .material-icons:hover {
   cursor: pointer;

@@ -12,11 +12,12 @@ import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import FooterPage from "./components/FooterPage";
 import Profile from "./components/Profile";
+import Feed from "./components/feed/Feed";
+
 class App extends React.Component {
   state = {
     allPosts: [],
   };
-
   getBGS = () => {
     axios
       .get("/posts")
@@ -38,13 +39,12 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getBGS();
-    console.log(this.state.Allposts);
   }
 
   render() {
     // {match} means i only want match from this.props not the whole props *
     // find here return only the object that matches not an array
-    if (!this.state.allPosts.length) return <div className="App" />;
+    // if (!this.state.allPosts.length) return <div className="App" />;
 
     return (
       <div className="App">
@@ -55,13 +55,13 @@ class App extends React.Component {
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto">
-                  <NavLink className="nav-link" to="/" id="navbar_home">
+                  <NavLink className="nav-link" href="/" id="navbar_home">
                     Home
                   </NavLink>
-                  <NavLink className="nav-link" to="/login" id="navbar_login">
+                  <NavLink className="nav-link" href="/login" id="navbar_login">
                     Login
                   </NavLink>
-                  <NavLink className="nav-link" to="/signup" id="navbar_signup">
+                  <NavLink className="nav-link" href="/signup" id="navbar_signup">
                     SignUp
                   </NavLink>
                 </Nav>
@@ -83,6 +83,9 @@ class App extends React.Component {
                   >
                     My Profile
                   </NavLink>
+                  <NavLink className="nav-link" to="/myfeed" id="navbar_myfeed">
+                    My Feed
+                  </NavLink>
                   <NavLink className="nav-link" to="/upload" id="navbar_upload">
                     Upload
                   </NavLink>
@@ -100,17 +103,13 @@ class App extends React.Component {
             </Navbar>
           )}
           <Switch>
-            <Route
-              exact
-              path="/"
-              render={(props) => (
-                <Home {...props} allPosts={this.state.allPosts} />
-              )}
-            />
+            <Route exact path="/" component={Home} />
             <Route exact path="/upload" component={UploadPage} />
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={Login} />
             <Route path="/profile" component={Profile} />
+            <Route path="/myfeed" component={Feed} />
+
             <Route
               path="/comments/:id"
               render={({ match }) => {

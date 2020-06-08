@@ -19,7 +19,7 @@ const UploadPage = (props) => {
           post_title: title,
           post_desc: desc,
           post_image: url,
-          post_owner:localStorage.getItem("user_id")
+          post_owner: localStorage.getItem("user_id"),
         })
         .then((data) => {
           if (data.error) {
@@ -43,10 +43,10 @@ const UploadPage = (props) => {
     if (title && desc && image) {
       const data = new FormData();
       data.append("file", image);
-      data.append("upload_preset", "whichbg");
-      data.append("cloud_name", "dfrj1nea2");
+      data.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
+      data.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
       axios
-        .post("https://api.cloudinary.com/v1_1/dfrj1nea2/image/upload", data)
+        .post(process.env.REACT_APP_CLOUDINARY_API, data)
         .then((data) => {
           setUrl(data.data.url);
         })
@@ -83,6 +83,7 @@ const UploadPage = (props) => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         id="upload_title"
+        maxLength="20"
       />
       <input
         type="text"
@@ -90,6 +91,7 @@ const UploadPage = (props) => {
         value={desc}
         onChange={(e) => setDesc(e.target.value)}
         id="upload_desc"
+        maxLength="55"
       />
       <div className="file-field input-field">
         <div className="btn #64b5f6 blue darken-1">
@@ -98,10 +100,22 @@ const UploadPage = (props) => {
             id="upload_selectimage"
             type="file"
             accept=".gif,.jpg,.jpeg,.png"
-            onChange={(e) => setImage(e.target.files[0])}
+            onChange={(e) => {
+              if (e.target.files[0].size > 2097152) {
+                swal({
+                  title: "No!",
+                  text: "Image is larger than 2mb",
+                  icon: "error",
+                  button: "sorry",
+                });
+              } else {
+                setImage(e.target.files[0]);
+              }
+            }}
             maxSize={2097152}
           />
         </div>
+
         <div className="file-path-wrapper">
           <input className="file-path validate" type="text" />
         </div>
@@ -114,6 +128,11 @@ const UploadPage = (props) => {
       >
         Submit post
       </button>
+      <div>
+        <p style={{ color: "red", fontSize: "12px" }}>
+          2mb max size , only following formats (gif,jpg,jpeg,png)
+        </p>
+      </div>
     </div>
   );
 };
