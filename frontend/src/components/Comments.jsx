@@ -34,16 +34,16 @@ export default class Comments extends Component {
   };
   handleSendButton = () => {
     axios
-      .post(`/posts/newcomment/${this.state.id}`, {
+      .post(`/api/v1/posts/newcomment/${this.state.id}`, {
         user_id: this.state.user_id,
         comment: this.state.comment,
         sender: this.state.sender,
       })
-      .then((result) => {        
+      .then((result) => {
         this.refs.inputField.value = "";
         this.setState({ comments: result.data.post.post_comments });
       })
-      .catch((e) => console.log(e));
+      .catch((err) => console.log(err));
   };
   render() {
     checkAuth();

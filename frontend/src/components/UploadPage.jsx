@@ -15,7 +15,7 @@ const UploadPage = (props) => {
   useEffect(() => {
     if (url) {
       axios
-        .post("/posts/newpost", {
+        .post("/api/v1/posts/newpost", {
           post_title: title,
           post_desc: desc,
           post_image: url,

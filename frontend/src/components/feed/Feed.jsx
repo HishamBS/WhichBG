@@ -14,7 +14,7 @@ class Feed extends React.Component {
   };
 
   handleDelete = (post_id) => {
-    axios.delete(`/posts/${post_id}`).then((result) => {
+    axios.delete(`/api/v1/posts/${post_id}`).then((result) => {
       if (result.data.msg == "deleted successfully") {
         swal({
           title: "Successfully Deleted",
@@ -29,14 +29,14 @@ class Feed extends React.Component {
   };
 
   handleUserLiked = () => {
-    axios.get(`/users/${this.state.user_id}/likedposts`).then((likedPosts) => {
+    axios.get(`/api/v1/users/${this.state.user_id}/likedposts`).then((likedPosts) => {
       this.setState({ userLiked: likedPosts.data });
     });
   };
 
   handleUserUploaded = () => {
     axios
-      .get(`/users/${this.state.user_id}/uploadedposts`)
+      .get(`/api/v1/users/${this.state.user_id}/uploadedposts`)
       .then((uploadedPosts) => {
         console.log(uploadedPosts);
 

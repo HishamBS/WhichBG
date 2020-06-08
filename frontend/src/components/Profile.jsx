@@ -17,7 +17,7 @@ class Profile extends React.Component {
   };
 
   handleUserInfo = () => {
-    axios.get(`/users/${this.state.user_id}`).then((result) => {
+    axios.get(`/api/v1/users/${this.state.user_id}`).then((result) => {
       if (result) {
         this.setState({
           nickname: result.data.nickname,
@@ -36,7 +36,7 @@ class Profile extends React.Component {
       )
     ) {
       axios
-        .put(`/users/editpassword/${this.state.user_id}`, {
+        .put(`/api/v1/users/editpassword/${this.state.user_id}`, {
           password: this.state.password,
         })
         .then((result) => {

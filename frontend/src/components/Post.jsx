@@ -22,7 +22,7 @@ class Post extends React.Component {
 
   getUserLiked = () => {
     axios
-      .get(`/users/${localStorage.getItem("user_id")}/likedposts`)
+      .get(`/api/v1/users/${localStorage.getItem("user_id")}/likedposts`)
       .then((likedPosts) => {
         this.setState({ userLiked: likedPosts.data });
       });
@@ -31,11 +31,11 @@ class Post extends React.Component {
   handleLikeButton = () => {
     if (localStorage.getItem("user_id")) {
       axios
-        .post(`/posts/like/${this.state.id}`, { user_id: this.state.user_id })
+        .post(`/api/v1/posts/like/${this.state.id}`, { user_id: this.state.user_id })
         .then((result) => {
           this.setState({ likes: result.data.post.post_likes });
         })
-        .catch((e) => console.log(e));
+        .catch((err) => console.log(err));
     }
     //remove
     let liked = false;

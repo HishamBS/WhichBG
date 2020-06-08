@@ -10,9 +10,9 @@ export default class Home extends Component {
 
   getBGS = () => {
     axios
-      .get("/posts")
+      .get("/api/v1/posts")
       .then((result) => this.setState({ allPosts: result.data }))
-      .catch((e) => console.log(e));
+      .catch((err) => console.log(err));
   };
 
   componentDidMount() {

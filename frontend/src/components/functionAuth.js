@@ -4,7 +4,7 @@ import swal from "sweetalert";
 
 export const register = newUser => {
   return axios
-    .post("/users/register", newUser)
+    .post("/api/v1/users/register", newUser)
     .then(res => {
       return res;
     })
@@ -13,7 +13,7 @@ export const register = newUser => {
 
 export const login = user => {
   return axios
-    .post("/users/login", user)
+    .post("/api/v1/users/login", user)
     .then(async res => {
       localStorage.setItem("usertoken", res.data.token);
       const decodedToken = await decode(res.data.token);
@@ -55,7 +55,7 @@ export const getUserData = async () => {
   const uid = localStorage.getItem("user_id");
   if (uid) {
     axios
-      .get(`/users/${uid}`)
+      .get(`/api/v1/users/${uid}`)
       .then(user => {
         console.log(user.data);
        return user.data

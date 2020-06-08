@@ -1,21 +1,23 @@
-import React from "react";
 import { Col, Row, Container } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
 import Post from "./Post";
-const Gallery = (props) => {
-  let allGallery = props.allPosts.map((post) => (
-    <Col id={`post_${props.allPosts.indexOf(post)}`} sm={4} className='mb-3'>
-      <Post post={post} />
-    </Col>
-  ));
-
-  return (
-    <div className="mt-5 mb-5">
-      <Container>
-        <Row >{allGallery}</Row>
-      </Container>
-    </div>
-  );
-};
-
-export default Gallery;
+import React, { Component } from "react";
+export default class Gallery extends Component {
+  render() {
+    let allGallery = this.props.allPosts.map((post) => (
+      <Col
+        id={`post_${this.props.allPosts.indexOf(post)}`}
+        sm={4}
+        className="mb-3"
+      >
+        <Post post={post} />
+      </Col>
+    ));
+    return (
+      <div className="mt-5 mb-5">
+        <Container>
+          <Row>{allGallery}</Row>
+        </Container>
+      </div>
+    );
+  }
+}
