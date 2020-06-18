@@ -33,7 +33,8 @@ router.get("/:id", (req, res) => {
 
 //get specific user liked posts
 router.get("/:id/likedposts", (req, res) => {
-  User.findById(req.params.id).populate("liked_posts")
+  User.findById(req.params.id)
+    .populate("liked_posts")
     .then((user) => {
       user
         ? res.status(200).json(user.liked_posts)
@@ -44,7 +45,8 @@ router.get("/:id/likedposts", (req, res) => {
 
 //get specific user uploaded posts
 router.get("/:id/uploadedposts", (req, res) => {
-  User.findById(req.params.id).populate("uploaded_posts")
+  User.findById(req.params.id)
+    .populate("uploaded_posts")
     .then((user) => {
       user
         ? res.status(200).json(user.uploaded_posts)
@@ -52,7 +54,6 @@ router.get("/:id/uploadedposts", (req, res) => {
     })
     .catch((err) => res.status(400).send(err));
 });
-
 
 //edit user info without password
 router.put("/edituser/:id", (req, res) => {

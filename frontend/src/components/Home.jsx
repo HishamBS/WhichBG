@@ -1,6 +1,7 @@
 import Gallery from "./Gallery";
 import { Helmet } from "react-helmet";
 import React, { Component } from "react";
+import { checkTokenExpired } from "./functionAuth";
 import axios from "axios";
 
 export default class Home extends Component {
@@ -20,6 +21,7 @@ export default class Home extends Component {
   }
 
   render() {
+    checkTokenExpired();
     return (
       <div>
         <Helmet>
