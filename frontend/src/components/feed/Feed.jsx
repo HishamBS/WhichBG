@@ -14,18 +14,34 @@ class Feed extends React.Component {
   };
 
   handleDelete = (post_id) => {
-    axios.delete(`/api/v1/posts/${post_id}`).then((result) => {
-      if (result.data.msg == "deleted successfully") {
-        swal({
-          title: "Successfully Deleted",
-          text: `😔`,
-          icon: "success",
-          button: "ok",
-        }).then(() => {
-          window.location.reload(true);
+    swal({
+      title: "Are you sure?",
+      text: "You will not be able to recover this Image file!",
+      icon: "warning",
+      buttons: [
+        'No, cancel it!',
+        'Yes, I am sure!'
+      ],
+      dangerMode: true,
+    }).then(function(isConfirm) {
+      if (isConfirm) {
+        axios.delete(`/api/v1/posts/${post_id}`).then((result) => {
+          if (result.data.msg == "deleted successfully") {
+            swal({
+              title: "Successfully Deleted",
+              text: `😔`,
+              icon: "success",
+              button: "ok",
+            }).then(() => {
+              window.location.reload(true);
+            });
+          }
         });
+      } else {
+        swal("Cancelled", "Your Image is safe :)", "error");
       }
     });
+    
   };
 
   handleUserLiked = () => {
